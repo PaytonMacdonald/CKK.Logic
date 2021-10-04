@@ -54,7 +54,6 @@ namespace CKK.Logic.Models
             if (item1.Quantity - quant <= 0)
             {
                 item1.Quantity = 0;
-                Items.Remove(item1);
             }
             else
             {
