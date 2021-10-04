@@ -126,9 +126,10 @@ namespace CKK.Logic.Models
             var query = from Item in Products 
                         where Item.Product.Id == id
                         select Item;
-            var itemOutput = query.FirstOrDefault();
             if (query != null)
-                return itemOutput;
+            {
+                return query.FirstOrDefault();
+            }
             else
                 return null;
         }

@@ -61,20 +61,31 @@ namespace CKK.Logic.Models
             }
             return item1;
         }
+
+
+
         public StoreItem FindStoreItemById(int id)
         {
             if (id < 0)
                 throw new InvalidIdException();
+
+
+
             var query = from Item in Items
                         where Item.Product.Id == id
                         select Item;
-            var itemOutput = query.FirstOrDefault();
-            if (itemOutput == null)
-                return null;
+            if (query != null)
+            {
+                return query.FirstOrDefault();
+            }
             else
-                return itemOutput;
+                return null;
 
         }
+
+
+
+
         public List<StoreItem> GetStoreItems()
         {
             return Items;
