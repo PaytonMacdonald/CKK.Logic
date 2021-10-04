@@ -94,7 +94,6 @@ namespace CKK.Logic.Models
                         where Item.Product.Id == id
                         select Item;
             return query.FirstOrDefault();
-
         }
         public List<ShoppingCartItem> GetProducts()
         {

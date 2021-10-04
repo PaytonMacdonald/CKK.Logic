@@ -51,15 +51,20 @@ namespace CKK.Logic.Models
             var item1 = FindStoreItemById(id);
             if (item1 == null)
                 throw new ProductDoesNotExistException();
-            item1.Quantity -= quant;
-            if (item1.Quantity < 0)
+            if (item1.Quantity - quant <= 0)
             {
                 item1.Quantity = 0;
+                Items.Remove(item1);
+            }
+            else
+            {
+                item1.Quantity = item1.Quantity - quant;
             }
             return item1;
         }
         public StoreItem FindStoreItemById(int id)
         {
+            // check if ID is less than 0
             if (id < 0)
                 throw new InvalidIdException();
             var query = from Item in Items
