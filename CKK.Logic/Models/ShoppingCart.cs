@@ -56,17 +56,6 @@ namespace CKK.Logic.Models
                 return null;
             }
         }
-
-
-
-
-
-
-
-
-
-
-        // //////////////////////////////////////////////////////////////
         public ShoppingCartItem RemoveProduct(int id, int quant)
         {
             if (quant < 0)
@@ -79,27 +68,11 @@ namespace CKK.Logic.Models
             item1.Quantity -= quant;
             if (item1.Quantity <= 0)
             {
-                var itemRemoved = item1;
-                itemRemoved.Quantity = 0;
-                Products.Remove(item1); // is this done correctly?????
-                return itemRemoved;
+                item1.Quantity = 0;
+                Products.Remove(item1);
             }
-            else
-            {
-                return item1;
-            }
+            return item1;
         }
-        // //////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
         public decimal GetTotal()
         {
             var queryPrices = from Item in Products
@@ -107,43 +80,18 @@ namespace CKK.Logic.Models
                               select Total;
             return queryPrices.Sum();
         }
-
-
-
-
-
-
-
-
-
-        // //////////////////////////////////////////////////////////////
         public ShoppingCartItem GetProductById(int id)
         {
+            // check if ID is less than 0
             if (id < 0)
                 throw new InvalidIdException();
 
-
-            var query = from Item in Products 
+            var query = from Item in Products
                         where Item.Product.Id == id
                         select Item;
-            if (query != null)
-            {
-                return query.FirstOrDefault();
-            }
-            else
-                return null;
+            return query.FirstOrDefault();
+
         }
-        // //////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
         public List<ShoppingCartItem> GetProducts()
         {
             return Products;
